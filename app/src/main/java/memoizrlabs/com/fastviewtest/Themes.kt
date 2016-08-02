@@ -10,6 +10,6 @@ class DefaultTheme : CustomTheme {
     override val primaryDark: Int get() = Colors.Gray
 }
 
-class InvertedTheme : CustomTheme by DefaultTheme() {
-    override val accent: Int get() = Colors.Blue
-}
+//class InvertedTheme : CustomTheme by DefaultTheme() {
+//    override val accent: Int get() = Colors.Blue
+//}

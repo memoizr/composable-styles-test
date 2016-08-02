@@ -1,6 +1,7 @@
 package memoizrlabs.com.fastviewtest
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import org.jetbrains.anko.alignParentRight
 import org.jetbrains.anko.below
+import org.jetbrains.anko.padding
 import org.jetbrains.anko.textColor
 
 class MainActivity : AppCompatActivity() {
@@ -25,48 +27,96 @@ class SettingsView(context: Context) : RelativeLayout(context) {
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        layout.labelTextView.text = "nope"
+        layout.headlineTextView.text = "nope"
     }
 }
 
 class SettingsViewLayout(view: SettingsView) {
-    lateinit var labelTextView: TextView private set
+    lateinit var headlineTextView: TextView private set
 
     init {
         view.apply {
-            textView(Header, Red) {
-                labelTextView = this
-                text = "hello world!"
-            }.params {
-                alignParentRight()
+            textView(HeadLine) {
+                headlineTextView = this
+                text = "Big Headline!"
             }
 
-            linearLayout(Vertical) {
-                textView() {
-                    text = "1 2 3"
+            linearLayout(Column) {
+                textView(NewsItemBody) {
+                    text = "Some Context"
                 }
-                linearLayout(Horizontal) {
-                    textView() {
-                        text = "1 2 3"
-                    }
+                textView(Subtitle) {
+                    text = "Subtitle"
                 }
             }.params {
-                below(labelTextView)
-                alignParentRight()
+                below(headlineTextView)
             }
 
-            textView {
-                text = "trolololol"
+            textView(Date) {
+                text = "Date"
+            }.params {
+                alignParentRight()
+                below(headlineTextView)
             }
         }
     }
 }
 
-val Header = { textView: TextView -> textView.textSize = 20f }
-val Red = { textView: TextView -> textView.textColor = textView.context.getColor(R.color.colorPrimary) }
-val Horizontal = { linearLayout: LinearLayout ->
-    linearLayout.orientation = LinearLayout.HORIZONTAL
+val HeadLine: TextView.() -> Unit = {
+    Header()
+    Accent()
 }
+
+val NewsItemBody: TextView.() -> Unit = {
+    textSize = 16f
+    typeface = Typeface.MONOSPACE
+}
+
+val Header: TextView.() -> Unit = {
+    textSize = 24f
+}
+
+val Date: TextView.() -> Unit = {
+    Gray()
+}
+
+val Subtitle: TextView.() -> Unit = {
+    Gray()
+    textSize = 10f
+}
+
+val Gray: TextView.() -> Unit = {
+    textColor = Colors.Gray
+}
+
+val Accent: TextView.() -> Unit = {
+    textColor = Colors.Accent
+}
+
+val Column: LinearLayout.() -> Unit = {
+    orientation = LinearLayout.VERTICAL
+    padding = 24
+}
+
+object Colors {
+    val Gray = 0xffaaaaaa.toInt() //Color.parseColor("#AAAAAA")
+    val Accent = 0xffFFaaaa.toInt()
+}
+
+//val Header: Style<TextView> = {
+//    textSize = 20f
+//}
+//
+//val Red: Style<TextView> = {
+////    Header(this)
+//    textColor = context.getColor(R.color.colorPrimary)
+//}
+//
+//val Horizontal: Style<LinearLayout> = {
+//    orientation = LinearLayout.HORIZONTAL
+//}
+
+//typealias Style<T> = T.() -> Unit
 
 fun <VG : ViewGroup> VG.textView(vararg style: TextView.() -> Unit, structure: TextView.() -> Unit): TextView {
     val textView = TextView(context).apply(structure)

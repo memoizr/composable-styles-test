@@ -10,6 +10,3 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(SettingsView(this))
     }
 }
-
-
-

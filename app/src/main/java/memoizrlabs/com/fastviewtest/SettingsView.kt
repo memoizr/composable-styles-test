@@ -1,13 +1,13 @@
 package memoizrlabs.com.fastviewtest
 
 import android.content.Context
-import android.widget.RelativeLayout
+import org.jetbrains.anko._RelativeLayout
 
-class SettingsView(context: Context) : RelativeLayout(context) {
-    private val layout = SettingsViewLayout(this)
+class SettingsView(context: Context) : _RelativeLayout(context) {
+    private val layout = SettingsViewLayout().inflate(this)
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        layout.headlineTextView.text = "nope"
+        layout.headlineTextView.text = layout.headlineTextView.text.toString() + "nope"
     }
 }

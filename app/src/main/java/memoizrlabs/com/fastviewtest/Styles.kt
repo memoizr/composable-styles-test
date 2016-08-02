@@ -1,46 +1,64 @@
 package memoizrlabs.com.fastviewtest
 
 import android.graphics.Typeface
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.textColor
 
-val HeadLine: TextView.() -> Unit = {
+val HeadlineTextStyle: TextView.() -> Unit = {
     Header()
-    Accent()
+    TextColorAccent()
 }
 
-val NewsItemBody: TextView.() -> Unit = {
+val NewsItemBodyStyle: TextView.() -> Unit = {
     textSize = 16f
     typeface = Typeface.MONOSPACE
 }
 
 val Header: TextView.() -> Unit = {
-    textSize = 24f
+    textSize = dimens.mediumTextSize
 }
 
-val Date: TextView.() -> Unit = {
-    Gray()
+object TextStyle {
+    val DateTextStyle: TextView.() -> Unit = {
+        TextColorPrimaryDark()
+        layout {
+            width = matchParent
+            height = matchParent
+            gravity = Gravity.BOTTOM or Gravity.RIGHT
+        }
+    }
 }
 
-val Subtitle: TextView.() -> Unit = {
-    Gray()
-    textSize = 10f
+inline fun View.layout(foo: ViewGroup.LayoutParams.() -> Unit) = this.layoutParams.foo()
+
+val SubtitleTextStyle: TextView.() -> Unit = {
+    TextColorPrimaryDark()
+    textSize = dimens.smallTextSize
 }
 
-val Gray: TextView.() -> Unit = {
-    textColor = Colors.Gray
+val TextColorPrimaryDark: TextView.() -> Unit = {
+    textColor = context.customTheme.primaryDark
 }
 
-val Accent: TextView.() -> Unit = {
+val TextColorAccent: TextView.() -> Unit = {
     textColor = context.customTheme.accent
 }
 
 val Column: LinearLayout.() -> Unit = {
     orientation = LinearLayout.VERTICAL
-    padding = 24
+    padding = dimens._2x
 }
+
+val Container: View.() -> Unit = {
+    padding = dimens._1x
+}
+
 
 //val Header: Style<TextView> = {
 //    textSize = 20f

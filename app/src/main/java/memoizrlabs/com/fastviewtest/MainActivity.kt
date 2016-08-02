@@ -10,69 +10,95 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import org.jetbrains.anko.alignParentRight
-import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.below
 import org.jetbrains.anko.textColor
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(SettingsView(this).layout)
-//        absoluteLayout {
-//            imageView(R.id.action_bar_activity_content).lparams() VG
-//        }
+        setContentView(SettingsView(this))
     }
 }
 
-class SettingsView(context: Context) : View(context) {
-    val layout = SettingsViewLayout(context)
+class SettingsView(context: Context) : RelativeLayout(context) {
+    private val layout = SettingsViewLayout(this)
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        layout.label.text = "nope"
+        layout.labelTextView.text = "nope"
     }
 }
 
-interface CustomLayout {
-//    val context: Context
-//    val root: RelativeLayout
-}
-
-class SettingsViewLayout(context: Context) : CustomLayout, RelativeLayout(context) {
-//    override val root: RelativeLayout = this
-    lateinit var label: TextView
+class SettingsViewLayout(view: SettingsView) {
+    lateinit var labelTextView: TextView private set
 
     init {
-        label = textView(Header, Red) {
-            id = 424242
-            text = "Privacy setting"
-        }.params { alignParentRight() }
-        linearLayout(Horizontal) {
-            this.textView() {
-                text = "1 2 3"
-//                }.params {
-//                    alignParentRight()
+        view.apply {
+            textView(Header, Red) {
+                labelTextView = this
+                text = "hello world!"
+            }.params {
+                alignParentRight()
             }
-//                sendStatisticButton = button(SettingsButton)
-        }.params { below(label) }
-        textView {
-            text = "trolololol"
-        }.params { }
+
+            linearLayout(Vertical) {
+                textView() {
+                    text = "1 2 3"
+                }
+                linearLayout(Horizontal) {
+                    textView() {
+                        text = "1 2 3"
+                    }
+                }
+            }.params {
+                below(labelTextView)
+                alignParentRight()
+            }
+
+            textView {
+                text = "trolololol"
+            }
+        }
     }
 }
 
-fun <VG : ViewGroup> VG.textView(vararg style: TextView.(VG) -> Unit, structure: TextView.() -> Unit): TextView {
-    println(this)
+val Header = { textView: TextView -> textView.textSize = 20f }
+val Red = { textView: TextView -> textView.textColor = textView.context.getColor(R.color.colorPrimary) }
+val Horizontal = { linearLayout: LinearLayout ->
+    linearLayout.orientation = LinearLayout.HORIZONTAL
+}
+
+fun <VG : ViewGroup> VG.textView(vararg style: TextView.() -> Unit, structure: TextView.() -> Unit): TextView {
     val textView = TextView(context).apply(structure)
-    style.forEach { it(textView, this) }
+    textView.id = View.generateViewId()
+    style.forEach { it(textView) }
     addView(textView)
     return textView
 }
 
+fun <VG : ViewGroup> VG.fooView(vararg style: FooView.() -> Unit, structure: FooView.() -> Unit): FooView {
+    val textView = FooView(context).apply(structure)
+    textView.id = View.generateViewId()
+    style.forEach { it(textView) }
+    addView(textView)
+    return textView
+}
+
+class FooView(context: Context) : View(context) {
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        println("attaching now fooView")
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        println("detaching now fooView")
+    }
+}
+
 fun <VG : ViewGroup> VG.relativeLayout(structure: RelativeLayout.() -> Unit) = RelativeLayout(context).apply(structure)
-fun <VG : ViewGroup> VG.linearLayout(vararg style: LinearLayout.(VG) -> Unit, structure: LinearLayout.() -> Unit): LinearLayout {
-    return LinearLayout(context).apply(structure).apply { style.forEach { it(this@linearLayout) } }.apply { this@linearLayout.addView(this) }
+fun <VG : ViewGroup> VG.linearLayout(vararg style: LinearLayout.() -> Unit, structure: LinearLayout.() -> Unit): LinearLayout {
+    return LinearLayout(context).apply(structure).apply { style.forEach { it() } }.apply { this@linearLayout.addView(this) }
 }
 
 fun LinearLayout.params(params: RelativeLayout.LayoutParams.() -> Unit): LinearLayout {
@@ -91,12 +117,9 @@ private fun View.foo(params: RelativeLayout.LayoutParams.() -> Unit) {
     this.layoutParams = layoutParams
 }
 
-val Header = { textView: TextView, parent: RelativeLayout -> textView.textSize = 10f }
-val Red = { textView: TextView, parent: RelativeLayout -> textView.textColor = textView.context.getColor(android.R.color.holo_blue_bright) }
-val Horizontal = { linearLayout: LinearLayout, parent: RelativeLayout ->
-    linearLayout.orientation = LinearLayout.HORIZONTAL
-    linearLayout.backgroundColor = R.color.colorPrimary
+val Vertical = { linearLayout: LinearLayout ->
+    linearLayout.orientation = LinearLayout.VERTICAL
 }
 
-val ListItem = { view: View, parent: RelativeLayout ->
+val ListItem = { view: View ->
 }

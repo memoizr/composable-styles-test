@@ -1,9 +1,9 @@
-package memoizrlabs.com.fastviewtest
+package memoizrlabs.com.composable_styles
 
 import android.graphics.Typeface
 import android.view.Gravity
 import android.widget.TextView
-import memoizrlabs.com.fastviewtest.TextStyle.TextViewStyle
+import memoizrlabs.com.composable_styles.TextStyle.TextViewStyle
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.textColor
 import org.jetbrains.anko.wrapContent

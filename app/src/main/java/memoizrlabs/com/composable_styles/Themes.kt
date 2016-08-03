@@ -1,4 +1,4 @@
-package memoizrlabs.com.fastviewtest
+package memoizrlabs.com.composable_styles
 
 interface AppTheme {
     val accent: Int

@@ -1,8 +1,8 @@
-package memoizrlabs.com.fastviewtest
+package memoizrlabs.com.composable_styles
 
 import android.view.View
 import android.widget.TextView
-import memoizrlabs.com.fastviewtest.TextStyle.DateTextStyle
+import memoizrlabs.com.composable_styles.TextStyle.DateTextStyle
 import org.jetbrains.anko.*
 
 class SettingsViewLayout : AnkoComponent<SettingsView> {

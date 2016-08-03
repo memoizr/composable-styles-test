@@ -1,4 +1,4 @@
-package memoizrlabs.com.fastviewtest
+package memoizrlabs.com.composable_styles
 
 object Colors {
     val Gray = 0xffaaaaaa.toInt() //Color.parseColor("#AAAAAA")

@@ -1,4 +1,4 @@
-package memoizrlabs.com.fastviewtest
+package memoizrlabs.com.composable_styles
 
 import android.widget.RelativeLayout
 import android.widget.TextView

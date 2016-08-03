@@ -1,15 +1,15 @@
 package memoizrlabs.com.fastviewtest
 
-interface CustomTheme {
+interface AppTheme {
     val accent: Int
     val primaryDark: Int
 }
 
-class DefaultTheme : CustomTheme {
+class DefaultTheme : AppTheme {
     override val accent: Int get() = Colors.Red
     override val primaryDark: Int get() = Colors.Gray
 }
 
-//class InvertedTheme : CustomTheme by DefaultTheme() {
-//    override val accent: Int get() = Colors.Blue
-//}
+class InvertedTheme : AppTheme by DefaultTheme() {
+    override val accent: Int get() = Colors.Blue
+}

@@ -1,4 +1,4 @@
-package memoizrlabs.com.composable_styles
+package memoizrlabs.com.composable_styles.utils
 
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +12,8 @@ fun <V: ViewGroup, Y: AnkoComponent<V>> Y.inflate(viewGroup: V) = this.apply {
     createView(AnkoContext.createDelegate(viewGroup)); Unit
 }
 
-val <T: _RelativeLayout> T.params: View.(android.widget.RelativeLayout.LayoutParams.() -> Unit) -> View get() =  { extraParams ->
-    if (this.layoutParams == null)  android.widget.RelativeLayout.LayoutParams(wrapContent, wrapContent)
+val <T: _RelativeLayout> T.params: View.(RelativeLayout.LayoutParams.() -> Unit) -> View get() =  { extraParams ->
+    if (this.layoutParams == null) RelativeLayout.LayoutParams(wrapContent, wrapContent)
     (layoutParams as RelativeLayout.LayoutParams).extraParams()
     this.layoutParams = layoutParams
     this

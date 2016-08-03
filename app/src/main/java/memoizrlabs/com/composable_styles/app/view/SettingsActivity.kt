@@ -1,7 +1,11 @@
-package memoizrlabs.com.composable_styles
+package memoizrlabs.com.composable_styles.app.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import memoizrlabs.com.composable_styles.app.styles.DefaultTheme
+import memoizrlabs.com.composable_styles.app.styles.InvertedTheme
+import memoizrlabs.com.composable_styles.utils.appTheme
+import memoizrlabs.com.composable_styles.utils.randomlyEither
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,4 +15,3 @@ class SettingsActivity : AppCompatActivity() {
     }
 }
 
-fun <T> randomlyEither(a: T, b: T) = if (Math.random() > 0.5) a else b

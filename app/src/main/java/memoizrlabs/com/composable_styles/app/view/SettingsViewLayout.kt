@@ -1,21 +1,25 @@
-package memoizrlabs.com.composable_styles
+package memoizrlabs.com.composable_styles.app.view
 
 import android.view.View
 import android.widget.TextView
-import memoizrlabs.com.composable_styles.TextStyle.DateTextStyle
+import memoizrlabs.com.composable_styles.app.styles.ButtonStyle
+import memoizrlabs.com.composable_styles.app.styles.GlobalStyles
+import memoizrlabs.com.composable_styles.app.styles.TextStyle
+import memoizrlabs.com.composable_styles.app.styles.TextStyle.DateTextStyle
+import memoizrlabs.com.composable_styles.utils.*
 import org.jetbrains.anko.*
 
 class SettingsViewLayout : AnkoComponent<SettingsView> {
     lateinit var headlineTextView: TextView private set
 
     override fun createView(ui: AnkoContext<SettingsView>): View =
-            ui.render(Container) {
+            ui.render(GlobalStyles.Container) {
                 textView(TextStyle.Headline) {
                     headlineTextView = this
                     text = "Big Headline!"
                 }
 
-                linearLayout(Column) {
+                linearLayout(GlobalStyles.Column) {
                     textView(TextStyle.NewsItemBody) {
                         text = "Some Context"
                     }

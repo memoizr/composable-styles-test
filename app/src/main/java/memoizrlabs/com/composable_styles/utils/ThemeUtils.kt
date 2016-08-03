@@ -1,7 +1,9 @@
-package memoizrlabs.com.composable_styles
+package memoizrlabs.com.composable_styles.utils
 
 import android.content.Context
 import android.view.View
+import memoizrlabs.com.composable_styles.app.styles.AppTheme
+import memoizrlabs.com.composable_styles.app.styles.DefaultTheme
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sp
 import kotlin.properties.ReadWriteProperty

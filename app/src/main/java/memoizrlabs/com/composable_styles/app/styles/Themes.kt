@@ -1,4 +1,4 @@
-package memoizrlabs.com.composable_styles
+package memoizrlabs.com.composable_styles.app.styles
 
 interface AppTheme {
     val accent: Int

@@ -46,9 +46,11 @@ interface CustomResources {
     val smallTextSize: Float
     val mediumTextSize: Float
     val giantTextSize: Float
+    val actionBarElevation: Float
 }
 
 class DefaultResources(private val context: Context): CustomResources {
+    override val actionBarElevation: Float get() = context.dip(10).toFloat()
     override val giantTextSize: Float get() = context.sp(18).toFloat()
     override val mediumTextSize: Float get() = context.sp(10).toFloat()
     override val smallTextSize: Float get() = context.sp(5).toFloat()

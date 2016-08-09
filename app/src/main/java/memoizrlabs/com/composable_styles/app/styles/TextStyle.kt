@@ -4,13 +4,13 @@ import android.graphics.Typeface
 import android.view.Gravity
 import android.widget.TextView
 import memoizrlabs.com.composable_styles.app.styles.TextStyle.TextViewStyle
+import memoizrlabs.com.composable_styles.utils.Style
 import memoizrlabs.com.composable_styles.utils.colors
 import memoizrlabs.com.composable_styles.utils.dimens
 import memoizrlabs.com.composable_styles.utils.layout
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.textColor
 import org.jetbrains.anko.wrapContent
-import memoizrlabs.com.composable_styles.utils.Style
 
 object TextStyle {
     typealias TextViewStyle = Style<TextView>

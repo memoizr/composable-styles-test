@@ -1,3 +1,4 @@
+ext.support_lib_version = "23.3.0"
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "kotlin-android-extensions"
@@ -6,6 +7,10 @@ buildscript {
     repositories {
         jcenter()
         maven { url "https://dl.bintray.com/kotlin/kotlin-eap-1.1" }
+        maven { url "https://jitpack.io" }
+        flatDir {
+            dirs 'libs'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
@@ -37,11 +42,78 @@ ext.anko_version = "0.8.2"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+//    compile(name: 'appcompat-v7-release', ext: 'aar')
+//    compile "org.jetbrains.anko:anko-appcompat-v7-release:0.8.2@aar"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
-    compile "org.jetbrains.anko:anko-sdk15:$anko_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+    compile "com.github.memoizr:shank:v1.3.0-beta"
+    androidTestCompile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+    androidTestCompile 'io.kotlintest:kotlintest:1.3.3'
+    androidTestCompile 'com.github.memoizr:assertk-core:69fe4786a99c84c4057ef7211741c9c14b280943'
+//    compile "org.jetbrains.anko:anko-sdk15:$anko_version"
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
+//    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+//    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+//    compile "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+//    compile "org.jetbrains.anko:anko-gridlayout-v7:$anko_version"
+//    compile "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
+//    compile "org.jetbrains.anko:anko-design:$anko_version"
+//    compile "org.jetbrains.anko:anko-percent:$anko_version"
 
+    compile "com.android.support:appcompat-v7:$support_lib_version"
+    compile "com.android.support:design:$support_lib_version"
+    compile "com.android.support:cardview-v7:$support_lib_version"
+    compile "com.android.support:recyclerview-v7:$support_lib_version"
+    compile "com.android.support:percent:$support_lib_version"
+    compile "com.android.support:palette-v7:$support_lib_version"
+
+    testCompile("com.squareup.assertj:assertj-android:1.1.1") {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+    }
+
+    testCompile("com.squareup.assertj:assertj-android-support-v4:1.1.1") {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+    }
+    androidTestCompile 'org.assertj:assertj-core:2.5.0'
+    androidTestCompile 'org.assertj:assertj-core:1.0.0'
+    androidTestCompile('com.squareup.assertj:assertj-android-appcompat-v7:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "appcompat-v7"
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-design:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "design"
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-mediarouter-v7:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "mediarouter-v7"
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-gridlayout-v7:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "gridlayout-v7"
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-cardview-v7:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "cardview-v7"
+    }
+    androidTestCompile('com.squareup.assertj:assertj-android-recyclerview-v7:1.1.1') {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "recyclerview-v7"
+    }
+    androidTestCompile 'com.squareup.assertj:assertj-android-palette-v7:1.1.1', {
+        exclude group: "com.android.support", module: "support-annotations"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "palette-v7"
+    }
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
